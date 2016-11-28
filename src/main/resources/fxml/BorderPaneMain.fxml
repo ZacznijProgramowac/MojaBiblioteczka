@@ -1,11 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.moja.biblioteczka.controllers.MainController">
    <top>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <MenuBar>
+           <menus>
+             <Menu mnemonicParsing="false" text="%file">
+               <items>
+                 <MenuItem mnemonicParsing="false" onAction="#closeApplication" text="%close" />
+               </items>
+             </Menu>
+             <Menu mnemonicParsing="false" text="%edit">
+                  <items>
+                     <RadioMenuItem mnemonicParsing="false" onAction="#setCaspian" text="%caspian">
+                        <toggleGroup>
+                           <ToggleGroup fx:id="styleGroup" />
+                        </toggleGroup>
+                     </RadioMenuItem>
+                     <RadioMenuItem mnemonicParsing="false" onAction="#setModena" selected="true" text="%modena" toggleGroup="$styleGroup" />
+                     <SeparatorMenuItem mnemonicParsing="false" />
+                     <CheckMenuItem mnemonicParsing="false" onAction="#setAlwaysOnTop" text="%alwaysOnTop" />
+                  </items>
+             </Menu>
+             <Menu mnemonicParsing="false" text="%help">
+               <items>
+                 <MenuItem mnemonicParsing="false" onAction="#about" text="%about" />
+               </items>
+             </Menu>
+           </menus>
+         </MenuBar>
       <fx:include fx:id="topMenuButtons" source="TopMenuButtons.fxml" />
       </VBox>
    </top>
