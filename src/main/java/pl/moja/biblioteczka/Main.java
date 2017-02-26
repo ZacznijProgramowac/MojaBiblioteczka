@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import pl.moja.biblioteczka.database.dbuitls.DbManager;
 import pl.moja.biblioteczka.utils.FxmlUtils;
 
 /**
@@ -23,5 +24,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle(FxmlUtils.getResourceBundle().getString("tittle.application"));
         primaryStage.show();
+
+        DbManager.initDatabase();
     }
 }
