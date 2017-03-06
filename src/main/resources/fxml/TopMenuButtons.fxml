@@ -26,6 +26,15 @@
             </ImageView>
          </graphic>
       </Button>
+      <Button mnemonicParsing="false" onAction="#addCategory" prefHeight="80.0" prefWidth="150.0" text="%add.category">
+         <graphic>
+            <ImageView fitHeight="48.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/category.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
