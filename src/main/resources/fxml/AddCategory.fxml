@@ -8,15 +8,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+<VBox minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.moja.biblioteczka.controllers.CategoryController">
    <children>
       <HBox alignment="TOP_CENTER" spacing="20.0">
          <children>
             <Label text="%add.category" />
-            <TextField />
-            <Button mnemonicParsing="false" text="%add.button" />
+            <TextField fx:id="categoryTextField" />
+            <Button fx:id="addCategoryButton" mnemonicParsing="false" onAction="#addCategoryOnAction" text="%add.button" />
             <Label text="%choose.category" />
-            <ComboBox prefWidth="150.0" />
+            <ComboBox fx:id="categoryComboBox" prefWidth="150.0" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
