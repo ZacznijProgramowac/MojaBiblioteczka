@@ -16,7 +16,8 @@
             <TextField fx:id="categoryTextField" />
             <Button fx:id="addCategoryButton" mnemonicParsing="false" onAction="#addCategoryOnAction" text="%add.button" />
             <Label text="%choose.category" />
-            <ComboBox fx:id="categoryComboBox" prefWidth="150.0" />
+            <ComboBox fx:id="categoryComboBox" onAction="#onActionComboBox" prefWidth="150.0" />
+            <Button fx:id="deleteCategoryButton" mnemonicParsing="false" onAction="#onActionDeleteButton" text="%delete.button" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
