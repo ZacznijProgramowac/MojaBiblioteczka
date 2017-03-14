@@ -7,7 +7,7 @@ Strona www: http://zacznijprogramowac.net
 Aplikacja bierze udział w konkursie:
 http://devstyle.pl/daj-sie-poznac/
 
-
+-----------------------------------
 
 MIT License
 Copyright (c) 2017 zacznijprogramowac.net
