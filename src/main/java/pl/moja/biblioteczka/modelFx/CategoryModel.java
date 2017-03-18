@@ -50,6 +50,15 @@ public class CategoryModel {
         init();
     }
 
+    public void updateCategoryInDataBase() {
+        CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
+        Category tempCategory = categoryDao.findById(Category.class, getCategory().getId());
+        tempCategory.setName(getCategory().getName());
+        categoryDao.creatOrUpdate(tempCategory);
+        DbManager.closeConnectionSource();
+        init();
+    }
+
     public ObservableList<CategoryFx> getCategoryList() {
         return categoryList;
     }
@@ -69,5 +78,4 @@ public class CategoryModel {
     public void setCategory(CategoryFx category) {
         this.category.set(category);
     }
-
 }

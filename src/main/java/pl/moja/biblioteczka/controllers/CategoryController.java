@@ -6,6 +6,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import pl.moja.biblioteczka.modelFx.CategoryFx;
 import pl.moja.biblioteczka.modelFx.CategoryModel;
+import pl.moja.biblioteczka.utils.DialogsUtils;
 
 /**
  * Created by ZacznijProgramowac.
@@ -18,6 +19,8 @@ public class CategoryController {
     private Button addCategoryButton;
     @FXML
     private Button deleteCategoryButton;
+    @FXML
+    private Button editCategoryButton;
     @FXML
     private TextField categoryTextField;
     @FXML
@@ -35,6 +38,7 @@ public class CategoryController {
     private void initBindings() {
         this.addCategoryButton.disableProperty().bind(categoryTextField.textProperty().isEmpty());
         this.deleteCategoryButton.disableProperty().bind(this.categoryModel.categoryProperty().isNull());
+        this.editCategoryButton.disableProperty().bind(this.categoryModel.categoryProperty().isNull());
     }
 
 
@@ -49,5 +53,14 @@ public class CategoryController {
 
     public void onActionComboBox() {
         this.categoryModel.setCategory(this.categoryComboBox.getSelectionModel().getSelectedItem());
+    }
+
+    public void onActionEditCategory() {
+        String newCategoryName = DialogsUtils.editDialog(this.categoryModel.getCategory().getName());
+        if(newCategoryName!=null){
+            this.categoryModel.getCategory().setName(newCategoryName);
+            this.categoryModel.updateCategoryInDataBase();
+        }
+
     }
 }
