@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import pl.moja.biblioteczka.database.dao.CategoryDao;
 import pl.moja.biblioteczka.database.dbuitls.DbManager;
 import pl.moja.biblioteczka.database.models.Category;
+import pl.moja.biblioteczka.utils.exceptions.ApplicationException;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class CategoryModel {
     private ObjectProperty<CategoryFx> category = new SimpleObjectProperty<>();
 
 
-    public void init() {
+    public void init() throws ApplicationException {
         CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
         List<Category> categories = categoryDao.queryForAll(Category.class);
         this.categoryList.clear();
@@ -34,14 +35,14 @@ public class CategoryModel {
         DbManager.closeConnectionSource();
     }
 
-    public void deleteCategoryById() {
+    public void deleteCategoryById() throws ApplicationException {
         CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
         categoryDao.deleteById(Category.class, category.getValue().getId());
         DbManager.closeConnectionSource();
         init();
     }
 
-    public void saveCategoryInDataBase(String name) {
+    public void saveCategoryInDataBase(String name) throws ApplicationException {
         CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
         Category category = new Category();
         category.setName(name);
@@ -50,7 +51,7 @@ public class CategoryModel {
         init();
     }
 
-    public void updateCategoryInDataBase() {
+    public void updateCategoryInDataBase() throws ApplicationException {
         CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
         Category tempCategory = categoryDao.findById(Category.class, getCategory().getId());
         tempCategory.setName(getCategory().getName());

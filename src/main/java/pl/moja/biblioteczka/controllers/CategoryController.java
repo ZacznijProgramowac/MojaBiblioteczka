@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import pl.moja.biblioteczka.modelFx.CategoryFx;
 import pl.moja.biblioteczka.modelFx.CategoryModel;
 import pl.moja.biblioteczka.utils.DialogsUtils;
+import pl.moja.biblioteczka.utils.exceptions.ApplicationException;
 
 /**
  * Created by ZacznijProgramowac.
@@ -30,7 +31,11 @@ public class CategoryController {
     @FXML
     public void initialize() {
         this.categoryModel = new CategoryModel();
-        this.categoryModel.init();
+        try {
+            this.categoryModel.init();
+        } catch (ApplicationException e) {
+            DialogsUtils.errorDialog(e.getMessage());
+        }
         this.categoryComboBox.setItems(this.categoryModel.getCategoryList());
         initBindings();
     }
@@ -43,12 +48,20 @@ public class CategoryController {
 
 
     public void addCategoryOnAction() {
-        categoryModel.saveCategoryInDataBase(categoryTextField.getText());
+        try {
+            categoryModel.saveCategoryInDataBase(categoryTextField.getText());
+        } catch (ApplicationException e) {
+            DialogsUtils.errorDialog(e.getMessage());
+        }
         categoryTextField.clear();
     }
 
     public void onActionDeleteButton() {
-        this.categoryModel.deleteCategoryById();
+        try {
+            this.categoryModel.deleteCategoryById();
+        } catch (ApplicationException e) {
+            DialogsUtils.errorDialog(e.getMessage());
+        }
     }
 
     public void onActionComboBox() {
@@ -59,7 +72,11 @@ public class CategoryController {
         String newCategoryName = DialogsUtils.editDialog(this.categoryModel.getCategory().getName());
         if(newCategoryName!=null){
             this.categoryModel.getCategory().setName(newCategoryName);
-            this.categoryModel.updateCategoryInDataBase();
+            try {
+                this.categoryModel.updateCategoryInDataBase();
+            } catch (ApplicationException e) {
+                DialogsUtils.errorDialog(e.getMessage());
+            }
         }
 
     }
