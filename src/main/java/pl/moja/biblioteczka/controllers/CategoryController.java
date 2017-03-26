@@ -1,9 +1,7 @@
 package pl.moja.biblioteczka.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import pl.moja.biblioteczka.modelFx.CategoryFx;
 import pl.moja.biblioteczka.modelFx.CategoryModel;
 import pl.moja.biblioteczka.utils.DialogsUtils;
@@ -26,6 +24,9 @@ public class CategoryController {
     private TextField categoryTextField;
     @FXML
     private ComboBox<CategoryFx> categoryComboBox;
+    @FXML
+    private TreeView<String> categoryTreeView;
+
     private CategoryModel categoryModel;
 
     @FXML
@@ -37,6 +38,7 @@ public class CategoryController {
             DialogsUtils.errorDialog(e.getMessage());
         }
         this.categoryComboBox.setItems(this.categoryModel.getCategoryList());
+        this.categoryTreeView.setRoot(this.categoryModel.getRoot());
         initBindings();
     }
 

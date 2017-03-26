@@ -24,11 +24,11 @@ public class Book implements BaseModel{
     @DatabaseField(columnName = "CATEGORY_ID", foreign = true, foreignAutoRefresh = true, foreignAutoCreate = true, canBeNull = false)
     private Category category;
 
-    @DatabaseField(columnName = "TITTLE", canBeNull = false)
+    @DatabaseField(columnName = "TITLE", canBeNull = false)
     private String title;
 
     @DatabaseField(columnName = "RELEASE_DATE")
-    private Date relaseDate;
+    private Date releaseDate;
 
     @DatabaseField(columnName = "ISBN", width = 1)
     private long isbn;
@@ -71,12 +71,12 @@ public class Book implements BaseModel{
         this.title = title;
     }
 
-    public Date getRelaseDate() {
-        return relaseDate;
+    public Date getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setRelaseDate(Date relaseDate) {
-        this.relaseDate = relaseDate;
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public long getIsbn() {
