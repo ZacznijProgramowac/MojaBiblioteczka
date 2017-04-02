@@ -18,10 +18,10 @@ public class Author implements BaseModel{
     @DatabaseField(generatedId = true)
     private int id;
 
-    @DatabaseField(columnName = "NAME", canBeNull = false)
+    @DatabaseField(columnName = "NAME", canBeNull = false, unique = true)
     private String name;
 
-    @DatabaseField(columnName = "SURNAME", canBeNull = false)
+    @DatabaseField(columnName = "SURNAME", canBeNull = false, unique = true)
     private String surname;
 
     @ForeignCollectionField(eager = true)

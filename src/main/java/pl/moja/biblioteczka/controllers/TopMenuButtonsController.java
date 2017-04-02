@@ -1,6 +1,5 @@
 package pl.moja.biblioteczka.controllers;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleGroup;
 
@@ -16,6 +15,8 @@ public class TopMenuButtonsController {
     private static final String STATISTICS_FXML = "/fxml/Statistics.fxml";
     private static final String ADD_BOOK_FXML = "/fxml/AddBook.fxml";
     private static final String ADD_CATEGORY_FXML = "/fxml/AddCategory.fxml";
+    private static final String ADD_AUTHOR_FXML = "/fxml/AddAuthor.fxml";
+
     private MainController mainController;
 
     @FXML
@@ -46,9 +47,16 @@ public class TopMenuButtonsController {
         mainController.setCenter(ADD_BOOK_FXML);
     }
 
-    public void addCategory(ActionEvent actionEvent) {
+    @FXML
+    public void addCategory() {
         resetToggleButtons();
         mainController.setCenter(ADD_CATEGORY_FXML);
+    }
+
+    @FXML
+    public void addAuthor() {
+        resetToggleButtons();
+        mainController.setCenter(ADD_AUTHOR_FXML);
     }
 
     private void resetToggleButtons() {
@@ -56,4 +64,6 @@ public class TopMenuButtonsController {
             toggleButtons.getSelectedToggle().setSelected(false);
         }
     }
+
+
 }
