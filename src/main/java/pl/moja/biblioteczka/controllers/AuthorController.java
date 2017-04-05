@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.TextFieldTableCell;
 import pl.moja.biblioteczka.modelFx.AuthorFx;
 import pl.moja.biblioteczka.modelFx.AuthorModel;
 import pl.moja.biblioteczka.utils.DialogsUtils;
@@ -33,7 +34,7 @@ public class AuthorController {
 
     private AuthorModel authorModel;
 
-    public void initialize(){
+    public void initialize() {
         this.authorModel = new AuthorModel();
         try {
             this.authorModel.init();
@@ -45,8 +46,15 @@ public class AuthorController {
         this.addButton.disableProperty().bind(this.nameTextField.textProperty().isEmpty().or(this.surnameTextField.textProperty().isEmpty()));
 
         this.authorTableView.setItems(this.authorModel.getAuthorFxObservableList());
-        this.nameColumn.setCellValueFactory(cellData-> cellData.getValue().nameProperty());
-        this.surnameColumn.setCellValueFactory(cellData-> cellData.getValue().surnameProperty());
+        this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+        this.surnameColumn.setCellValueFactory(cellData -> cellData.getValue().surnameProperty());
+
+        this.nameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        this.surnameColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        this.authorTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            this.authorModel.setAuthorFxObjectPropertyEdit(newValue);
+        });
 
     }
 
@@ -58,5 +66,23 @@ public class AuthorController {
         }
         this.nameTextField.clear();
         this.surnameTextField.clear();
+    }
+
+    public void onEditCommitName(TableColumn.CellEditEvent<AuthorFx, String> authorFxStringCellEditEvent) {
+        this.authorModel.getAuthorFxObjectPropertyEdit().setName(authorFxStringCellEditEvent.getNewValue());
+        updateInDatabase();
+    }
+
+    public void onEditCommitSurname(TableColumn.CellEditEvent<AuthorFx, String> authorFxStringCellEditEvent) {
+        this.authorModel.getAuthorFxObjectPropertyEdit().setSurname(authorFxStringCellEditEvent.getNewValue());
+        updateInDatabase();
+    }
+
+    private void updateInDatabase() {
+        try {
+            this.authorModel.saveAuthorEditInDataBase();
+        } catch (ApplicationException e) {
+            DialogsUtils.errorDialog(e.getMessage());
+        }
     }
 }

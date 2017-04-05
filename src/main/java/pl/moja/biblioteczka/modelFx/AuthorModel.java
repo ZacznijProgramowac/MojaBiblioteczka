@@ -20,6 +20,8 @@ import java.util.List;
 public class AuthorModel {
 
     private ObjectProperty<AuthorFx> authorFxObjectProperty = new SimpleObjectProperty<>(new AuthorFx());
+    private ObjectProperty<AuthorFx> authorFxObjectPropertyEdit = new SimpleObjectProperty<>(new AuthorFx());
+
     private ObservableList<AuthorFx> authorFxObservableList = FXCollections.observableArrayList();
 
 
@@ -34,14 +36,23 @@ public class AuthorModel {
         DbManager.closeConnectionSource();
     }
 
-
+    public void saveAuthorEditInDataBase() throws ApplicationException {
+        saveOrUpdate(this.getAuthorFxObjectPropertyEdit());
+    }
     public void saveAuthorInDataBase() throws ApplicationException {
+        saveOrUpdate(this.getAuthorFxObjectProperty());
+    }
+
+    private void saveOrUpdate(AuthorFx authorFxObjectPropertyEdit) throws ApplicationException {
         AuthorDao authorDao = new AuthorDao(DbManager.getConnectionSource());
-        Author author = ConverterAuthor.converToAuthor(this.getAuthorFxObjectProperty());
+        Author author = ConverterAuthor.converToAuthor(authorFxObjectPropertyEdit);
         authorDao.creatOrUpdate(author);
         DbManager.closeConnectionSource();
         this.init();
     }
+
+
+
 
 
     public AuthorFx getAuthorFxObjectProperty() {
@@ -62,5 +73,17 @@ public class AuthorModel {
 
     public void setAuthorFxObservableList(ObservableList<AuthorFx> authorFxObservableList) {
         this.authorFxObservableList = authorFxObservableList;
+    }
+
+    public AuthorFx getAuthorFxObjectPropertyEdit() {
+        return authorFxObjectPropertyEdit.get();
+    }
+
+    public ObjectProperty<AuthorFx> authorFxObjectPropertyEditProperty() {
+        return authorFxObjectPropertyEdit;
+    }
+
+    public void setAuthorFxObjectPropertyEdit(AuthorFx authorFxObjectPropertyEdit) {
+        this.authorFxObjectPropertyEdit.set(authorFxObjectPropertyEdit);
     }
 }
