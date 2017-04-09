@@ -1,10 +1,7 @@
 package pl.moja.biblioteczka.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import pl.moja.biblioteczka.modelFx.AuthorFx;
 import pl.moja.biblioteczka.modelFx.AuthorModel;
@@ -30,6 +27,8 @@ public class AuthorController {
     private TableColumn<AuthorFx, String> nameColumn;
     @FXML
     private TableColumn<AuthorFx, String> surnameColumn;
+    @FXML
+    private MenuItem deleteMenuItem;
 
 
     private AuthorModel authorModel;
@@ -41,10 +40,11 @@ public class AuthorController {
         } catch (ApplicationException e) {
             DialogsUtils.errorDialog(e.getMessage());
         }
-        this.authorModel.authorFxObjectPropertyProperty().get().nameProperty().bind(this.nameTextField.textProperty());
-        this.authorModel.authorFxObjectPropertyProperty().get().surnameProperty().bind(this.surnameTextField.textProperty());
-        this.addButton.disableProperty().bind(this.nameTextField.textProperty().isEmpty().or(this.surnameTextField.textProperty().isEmpty()));
+        bindings();
+        bindingsTableView();
+    }
 
+    private void bindingsTableView() {
         this.authorTableView.setItems(this.authorModel.getAuthorFxObservableList());
         this.nameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
         this.surnameColumn.setCellValueFactory(cellData -> cellData.getValue().surnameProperty());
@@ -55,7 +55,13 @@ public class AuthorController {
         this.authorTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             this.authorModel.setAuthorFxObjectPropertyEdit(newValue);
         });
+    }
 
+    private void bindings() {
+        this.authorModel.authorFxObjectPropertyProperty().get().nameProperty().bind(this.nameTextField.textProperty());
+        this.authorModel.authorFxObjectPropertyProperty().get().surnameProperty().bind(this.surnameTextField.textProperty());
+        this.addButton.disableProperty().bind(this.nameTextField.textProperty().isEmpty().or(this.surnameTextField.textProperty().isEmpty()));
+        this.deleteMenuItem.disableProperty().bind(this.authorTableView.getSelectionModel().selectedItemProperty().isNull());
     }
 
     public void addAuthorOnAction() {
@@ -81,6 +87,14 @@ public class AuthorController {
     private void updateInDatabase() {
         try {
             this.authorModel.saveAuthorEditInDataBase();
+        } catch (ApplicationException e) {
+            DialogsUtils.errorDialog(e.getMessage());
+        }
+    }
+
+    public void deleteAuthorOnAction( ) {
+        try {
+            this.authorModel.deleteAuthorInDataBase();
         } catch (ApplicationException e) {
             DialogsUtils.errorDialog(e.getMessage());
         }
