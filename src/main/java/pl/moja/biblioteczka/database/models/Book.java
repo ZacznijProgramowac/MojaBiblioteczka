@@ -27,6 +27,9 @@ public class Book implements BaseModel{
     @DatabaseField(columnName = "TITLE", canBeNull = false)
     private String title;
 
+    @DatabaseField(columnName = "DESCRIPTION")
+    private String description;
+
     @DatabaseField(columnName = "RELEASE_DATE")
     private Date releaseDate;
 
@@ -101,6 +104,14 @@ public class Book implements BaseModel{
 
     public void setAddedDate(Date addedDate) {
         this.addedDate = addedDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
 
