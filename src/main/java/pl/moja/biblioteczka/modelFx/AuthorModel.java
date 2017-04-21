@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import pl.moja.biblioteczka.database.dao.AuthorDao;
-import pl.moja.biblioteczka.database.dbuitls.DbManager;
 import pl.moja.biblioteczka.database.models.Author;
 import pl.moja.biblioteczka.utils.converters.ConverterAuthor;
 import pl.moja.biblioteczka.utils.exceptions.ApplicationException;
@@ -26,14 +25,14 @@ public class AuthorModel {
 
 
     public void init() throws ApplicationException {
-        AuthorDao authorDao = new AuthorDao(DbManager.getConnectionSource());
+        AuthorDao authorDao = new AuthorDao();
         List<Author> authorList = authorDao.queryForAll(Author.class);
         this.authorFxObservableList.clear();
         authorList.forEach(author -> {
             AuthorFx authorFx = ConverterAuthor.convertToAuthorFx(author);
             this.authorFxObservableList.add(authorFx);
         });
-        DbManager.closeConnectionSource();
+
     }
 
     public void saveAuthorEditInDataBase() throws ApplicationException {
@@ -44,17 +43,15 @@ public class AuthorModel {
     }
 
     public void deleteAuthorInDataBase() throws ApplicationException {
-        AuthorDao authorDao = new AuthorDao(DbManager.getConnectionSource());
+        AuthorDao authorDao = new AuthorDao();
         authorDao.deleteById(Author.class, this.getAuthorFxObjectPropertyEdit().getId());
-        DbManager.closeConnectionSource();
         this.init();
     }
 
     private void saveOrUpdate(AuthorFx authorFxObjectPropertyEdit) throws ApplicationException {
-        AuthorDao authorDao = new AuthorDao(DbManager.getConnectionSource());
+        AuthorDao authorDao = new AuthorDao();
         Author author = ConverterAuthor.converToAuthor(authorFxObjectPropertyEdit);
         authorDao.creatOrUpdate(author);
-        DbManager.closeConnectionSource();
         this.init();
     }
 

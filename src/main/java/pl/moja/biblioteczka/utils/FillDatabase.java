@@ -34,7 +34,7 @@ public class FillDatabase {
 
         Category category2 = new Category();
         category2.setName("Sensacja");
-        CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
+        CategoryDao categoryDao = new CategoryDao();
         try {
             categoryDao.creatOrUpdate(category2);
             DbManager.closeConnectionSource();
@@ -83,7 +83,7 @@ public class FillDatabase {
         book4.setReleaseDate(new Date());
         book4.setAddedDate(new Date());
 
-        BookDao bookDao = new BookDao(DbManager.getConnectionSource());
+        BookDao bookDao = new BookDao();
         try {
             bookDao.creatOrUpdate(book1);
             bookDao.creatOrUpdate(book2);

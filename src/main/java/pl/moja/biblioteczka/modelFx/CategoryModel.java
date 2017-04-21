@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 import pl.moja.biblioteczka.database.dao.CategoryDao;
-import pl.moja.biblioteczka.database.dbuitls.DbManager;
 import pl.moja.biblioteczka.database.models.Category;
 import pl.moja.biblioteczka.utils.converters.ConverterCategory;
 import pl.moja.biblioteczka.utils.exceptions.ApplicationException;
@@ -26,11 +25,10 @@ public class CategoryModel {
 
 
     public void init() throws ApplicationException {
-        CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
+        CategoryDao categoryDao = new CategoryDao();
         List<Category> categories = categoryDao.queryForAll(Category.class);
         initCategoryList(categories);
         initRoot(categories);
-        DbManager.closeConnectionSource();
     }
 
     private void initRoot(List<Category> categories) {
@@ -53,27 +51,24 @@ public class CategoryModel {
     }
 
     public void deleteCategoryById() throws ApplicationException {
-        CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
+        CategoryDao categoryDao = new CategoryDao();
         categoryDao.deleteById(Category.class, category.getValue().getId());
-        DbManager.closeConnectionSource();
         init();
     }
 
     public void saveCategoryInDataBase(String name) throws ApplicationException {
-        CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
+        CategoryDao categoryDao = new CategoryDao();
         Category category = new Category();
         category.setName(name);
         categoryDao.creatOrUpdate(category);
-        DbManager.closeConnectionSource();
         init();
     }
 
     public void updateCategoryInDataBase() throws ApplicationException {
-        CategoryDao categoryDao = new CategoryDao(DbManager.getConnectionSource());
+        CategoryDao categoryDao = new CategoryDao();
         Category tempCategory = categoryDao.findById(Category.class, getCategory().getId());
         tempCategory.setName(getCategory().getName());
         categoryDao.creatOrUpdate(tempCategory);
-        DbManager.closeConnectionSource();
         init();
     }
 
