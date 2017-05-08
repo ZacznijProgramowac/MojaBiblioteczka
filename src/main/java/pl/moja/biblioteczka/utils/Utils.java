@@ -14,4 +14,8 @@ public class Utils {
     public static Date convertToDate(LocalDate localDate){
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
+
+    public static LocalDate convertToLocalDate(Date date){
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
 }

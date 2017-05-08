@@ -22,15 +22,15 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </HBox>
-      <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+      <TableView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" fx:id="booksTableView">
         <columns>
-          <TableColumn prefWidth="75.0" text="%title.book" />
-          <TableColumn prefWidth="75.0" text="%desc.book" />
-            <TableColumn prefWidth="75.0" text="%author.book" />
-            <TableColumn prefWidth="75.0" text="%category.book" />
-            <TableColumn prefWidth="75.0" text="%rating.book" />
-            <TableColumn prefWidth="75.0" text="%isbn.book" />
-            <TableColumn prefWidth="75.0" text="%release.book" />
+          <TableColumn prefWidth="75.0" text="%title.book" fx:id="titleColumn"/>
+          <TableColumn prefWidth="75.0" text="%desc.book" fx:id="descColumn"/>
+            <TableColumn prefWidth="75.0" text="%author.book" fx:id="authorColumn"/>
+            <TableColumn prefWidth="75.0" text="%category.book" fx:id="categoryColumn"/>
+            <TableColumn prefWidth="75.0" text="%rating.book" fx:id="ratingColumn"/>
+            <TableColumn prefWidth="75.0" text="%isbn.book" fx:id="isbnColumn"/>
+            <TableColumn prefWidth="75.0" text="%release.book" fx:id="releaseColumn"/>
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
