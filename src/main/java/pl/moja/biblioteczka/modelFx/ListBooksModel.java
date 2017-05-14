@@ -39,6 +39,7 @@ public class ListBooksModel {
     public void init() throws ApplicationException {
         BookDao bookDao = new BookDao();
         List<Book> books = bookDao.queryForAll(Book.class);
+        bookFxList.clear();
         books.forEach(book -> {
             this.bookFxList.add(ConverterBook.convertToBookFx(book));
         });
@@ -58,6 +59,12 @@ public class ListBooksModel {
         } else {
             this.bookFxObservableList.setAll(this.bookFxList);
         }
+    }
+
+    public void deleteBook(BookFx bookFx) throws ApplicationException {
+        BookDao bookDao = new BookDao();
+        bookDao.deleteById(Book.class, bookFx.getId());
+        init();
     }
 
     private void initAuthors() throws ApplicationException {
