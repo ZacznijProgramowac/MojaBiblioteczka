@@ -1,6 +1,7 @@
 package pl.moja.biblioteczka.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import pl.moja.biblioteczka.modelFx.AuthorFx;
@@ -19,6 +20,10 @@ import java.time.LocalDate;
  */
 public class ListBooksController {
 
+    @FXML
+    private ComboBox categoryComboBox;
+    @FXML
+    private ComboBox authorComboBox;
     @FXML
     private TableView<BookFx> booksTableView;
     @FXML
@@ -47,6 +52,11 @@ public class ListBooksController {
             DialogsUtils.errorDialog(e.getMessage());
         }
 
+        this.categoryComboBox.setItems(this.listBooksModel.getCategoryFxObservableList());
+        this.authorComboBox.setItems(this.listBooksModel.getAuthorFxObservableList());
+        this.listBooksModel.categoryFxObjectPropertyProperty().bind(this.categoryComboBox.valueProperty());
+        this.listBooksModel.authorFxObjectPropertyProperty().bind(this.authorComboBox.valueProperty());
+
         this.booksTableView.setItems(this.listBooksModel.getBookFxObservableList());
         this.titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
         this.descColumn.setCellValueFactory(cellData -> cellData.getValue().descriptionProperty());
@@ -55,5 +65,17 @@ public class ListBooksController {
         this.releaseColumn.setCellValueFactory(cellData -> cellData.getValue().releaseDateProperty());
         this.authorColumn.setCellValueFactory(cellData -> cellData.getValue().authorFxProperty());
         this.categoryColumn.setCellValueFactory(cellData -> cellData.getValue().categoryFxProperty());
+    }
+
+    public void filterOnActionComboBox() {
+       this.listBooksModel.filterBooksList();
+    }
+
+    public void clearCategoryComboBox() {
+        this.categoryComboBox.getSelectionModel().clearSelection();
+    }
+
+    public void clearAuthorComboBox() {
+        this.authorComboBox.getSelectionModel().clearSelection();
     }
 }

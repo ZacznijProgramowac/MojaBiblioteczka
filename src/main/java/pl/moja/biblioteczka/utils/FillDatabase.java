@@ -79,7 +79,7 @@ public class FillDatabase {
         author4.setSurname("Pratchett");
         Book book4 = new Book();
         book4.setCategory(category4);
-        book4.setAuthor(author3);
+        book4.setAuthor(author4);
         book4.setTitle("Kolor magii");
         book4.setIsbn("8386740418l");
         book4.setRating(3);
