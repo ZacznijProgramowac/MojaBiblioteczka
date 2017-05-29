@@ -7,6 +7,8 @@ import pl.moja.biblioteczka.modelFx.CategoryModel;
 import pl.moja.biblioteczka.utils.DialogsUtils;
 import pl.moja.biblioteczka.utils.exceptions.ApplicationException;
 
+import java.sql.SQLException;
+
 /**
  * Created by ZacznijProgramowac.
  * https://www.youtube.com/zacznijprogramowac
@@ -61,7 +63,7 @@ public class CategoryController {
     public void onActionDeleteButton() {
         try {
             this.categoryModel.deleteCategoryById();
-        } catch (ApplicationException e) {
+        } catch (ApplicationException | SQLException e) {
             DialogsUtils.errorDialog(e.getMessage());
         }
     }

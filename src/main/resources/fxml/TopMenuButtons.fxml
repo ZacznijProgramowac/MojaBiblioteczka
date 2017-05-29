@@ -10,13 +10,10 @@
 
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.moja.biblioteczka.controllers.TopMenuButtonsController">
    <children>
-      <ToggleButton mnemonicParsing="false" onAction="#openLibrary" prefHeight="80.0" prefWidth="150.0" text="%library">
+      <ToggleButton mnemonicParsing="false" onAction="#openListBooks" prefHeight="80.0" prefWidth="150.0" text="%list.books">
          <toggleGroup>
             <ToggleGroup fx:id="toggleButtons" />
-         </toggleGroup>
-      </ToggleButton>
-      <ToggleButton mnemonicParsing="false" onAction="#openListBooks" prefHeight="80.0" prefWidth="150.0" text="%list.books" toggleGroup="$toggleButtons" />
-      <ToggleButton mnemonicParsing="false" onAction="#openStatistics" prefHeight="80.0" prefWidth="150.0" text="%stats" toggleGroup="$toggleButtons" />
+         </toggleGroup></ToggleButton>
       <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#addBook" prefHeight="80.0" prefWidth="150.0" text="%add_book">
          <graphic>
             <ImageView fitHeight="60.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">

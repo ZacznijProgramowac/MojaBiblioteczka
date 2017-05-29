@@ -16,6 +16,8 @@ import pl.moja.biblioteczka.utils.exceptions.ApplicationException;
 public class BookController {
 
     @FXML
+    private Button addButton;
+    @FXML
     private ComboBox<CategoryFx> categoryComboBox;
     @FXML
     private ComboBox<AuthorFx> authorComboBox;
@@ -33,7 +35,7 @@ public class BookController {
     private BookModel bookModel;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         this.bookModel = new BookModel();
         try {
             this.bookModel.init();
@@ -41,6 +43,16 @@ public class BookController {
             DialogsUtils.errorDialog(e.getMessage());
         }
         bindings();
+        validation();
+    }
+
+    private void validation() {
+        this.addButton.disableProperty().bind(this.authorComboBox.valueProperty().isNull()
+                .or(this.categoryComboBox.valueProperty().isNull())
+                .or(this.titleTextField.textProperty().isEmpty())
+                .or(this.descTextArea.textProperty().isEmpty())
+                .or(this.isbnTextField.textProperty().isEmpty())
+                .or(this.releaseDatePicker.valueProperty().isNull()));
     }
 
     public void bindings() {
@@ -59,9 +71,20 @@ public class BookController {
     public void addBookOnAction() {
         try {
             this.bookModel.saveBookInDataBase();
+            clearFields();
         } catch (ApplicationException e) {
             DialogsUtils.errorDialog(e.getMessage());
         }
+    }
+
+    private void clearFields() {
+        this.authorComboBox.getSelectionModel().clearSelection();
+        this.categoryComboBox.getSelectionModel().clearSelection();
+        this.titleTextField.clear();
+        this.descTextArea.clear();
+        this.ratingSlider.setValue(1);
+        this.isbnTextField.clear();
+        this.releaseDatePicker.getEditor().clear();
     }
 
     public BookModel getBookModel() {

@@ -13,15 +13,18 @@ import java.util.Date;
 @DatabaseTable(tableName = "BOOKS")
 public class Book implements BaseModel{
 
+    public static final String AUTHOR_ID = "AUTHOR_ID";
+    public static final String CATEGORY_ID = "CATEGORY_ID";
+
     public Book() {
     }
 
     @DatabaseField(generatedId = true)
     private int id;
 
-    @DatabaseField(columnName = "AUTHOR_ID", foreign = true, foreignAutoRefresh = true, foreignAutoCreate = true, canBeNull = false)
+    @DatabaseField(columnName = AUTHOR_ID, foreign = true, foreignAutoRefresh = true, foreignAutoCreate = true, canBeNull = false)
     private Author author;
-    @DatabaseField(columnName = "CATEGORY_ID", foreign = true, foreignAutoRefresh = true, foreignAutoCreate = true, canBeNull = false)
+    @DatabaseField(columnName = CATEGORY_ID, foreign = true, foreignAutoRefresh = true, foreignAutoCreate = true, canBeNull = false)
     private Category category;
 
     @DatabaseField(columnName = "TITLE", canBeNull = false)

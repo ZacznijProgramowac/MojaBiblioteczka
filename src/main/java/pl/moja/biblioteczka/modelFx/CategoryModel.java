@@ -5,11 +5,14 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
+import pl.moja.biblioteczka.database.dao.BookDao;
 import pl.moja.biblioteczka.database.dao.CategoryDao;
+import pl.moja.biblioteczka.database.models.Book;
 import pl.moja.biblioteczka.database.models.Category;
 import pl.moja.biblioteczka.utils.converters.ConverterCategory;
 import pl.moja.biblioteczka.utils.exceptions.ApplicationException;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -50,9 +53,11 @@ public class CategoryModel {
         });
     }
 
-    public void deleteCategoryById() throws ApplicationException {
+    public void deleteCategoryById() throws ApplicationException, SQLException {
         CategoryDao categoryDao = new CategoryDao();
         categoryDao.deleteById(Category.class, category.getValue().getId());
+        BookDao bookDao = new BookDao();
+        bookDao.deleteByColumnName(Book.CATEGORY_ID, category.getValue().getId());
         init();
     }
 

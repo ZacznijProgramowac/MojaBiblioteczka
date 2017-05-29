@@ -8,6 +8,8 @@ import pl.moja.biblioteczka.modelFx.AuthorModel;
 import pl.moja.biblioteczka.utils.DialogsUtils;
 import pl.moja.biblioteczka.utils.exceptions.ApplicationException;
 
+import java.sql.SQLException;
+
 /**
  * Created by ZacznijProgramowac.
  * https://www.youtube.com/zacznijprogramowac
@@ -92,10 +94,10 @@ public class AuthorController {
         }
     }
 
-    public void deleteAuthorOnAction( ) {
+    public void deleteAuthorOnAction() {
         try {
             this.authorModel.deleteAuthorInDataBase();
-        } catch (ApplicationException e) {
+        } catch (ApplicationException | SQLException e) {
             DialogsUtils.errorDialog(e.getMessage());
         }
     }
