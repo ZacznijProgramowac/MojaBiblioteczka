@@ -14,6 +14,7 @@ import java.util.Date;
  * Created by ZacznijProgramowac.
  * https://www.youtube.com/zacznijprogramowac
  * http://zacznijprogramowac.net/
+ * Służy jako wypełniacz bazy danych
  */
 public class FillDatabase {
     public static  void fillDatabase(){

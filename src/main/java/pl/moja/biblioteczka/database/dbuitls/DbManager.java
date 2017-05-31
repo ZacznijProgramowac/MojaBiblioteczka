@@ -30,7 +30,7 @@ public class DbManager {
 
     public static void initDatabase(){
         createConnectionSource();
-        dropTable();
+        dropTable(); //zakomentuj, żeby nie kasować za każym razem tabel w bazie
         createTable();
         closeConnectionSource();
     }

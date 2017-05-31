@@ -27,6 +27,6 @@ public class Main extends Application {
         primaryStage.show();
 
         DbManager.initDatabase();
-        FillDatabase.fillDatabase();
+        FillDatabase.fillDatabase(); // w tym miejscu uruchamiam dodatkowy kod, który wypełnia bazę danych
     }
 }
