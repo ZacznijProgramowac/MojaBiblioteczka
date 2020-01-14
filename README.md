@@ -4,9 +4,6 @@ Więcej na https://www.youtube.com/playlist?list=PLpzwMkmxJDUwQuQR7Rezut5UE_8UGD
 
 Strona www: http://zacznijprogramowac.net
 
-Aplikacja bierze udział w konkursie:
-http://devstyle.pl/daj-sie-poznac/
-
 -----------------------------------
 
 MIT License
